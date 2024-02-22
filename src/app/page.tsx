@@ -51,8 +51,8 @@ const Page = () => {
           <div key={index} className="mb-4 grid grid-cols-5 gap-4 items-center">
             <label className="mb-3 font-bold w-10 h-10 rounded-full flex items-center justify-center border border-gray-400 mr-2">{day.day}</label>
             <div className="col-span-1">
-              <label htmlFor='check' className="flex bg-gray-300 cursor-pointer relative w-12 h-6 rounded-full">
-                <input type="checkbox" id='check' className='sr-only peer' checked={day.isOpen} onChange={() => handleToggle(index, 'isOpen')} />
+              <label htmlFor={`check-${index}`} className="flex bg-gray-300 cursor-pointer relative w-12 h-6 rounded-full">
+                <input type="checkbox" id={`check-${index}`} className='sr-only peer' checked={day.isOpen} onChange={() => handleToggle(index, 'isOpen')} />
                 <span className={`w-5 h-5 bg-white absolute rounded-full left-1 top-1 peer-checked:bg-blue-600 peer-checked:left-6 transition-all duration-500 ${day.isOpen ? 'peer-checked:bg-blue-600 peer-checked:left-6' : ''}`}></span>
               </label>
             </div>
@@ -60,19 +60,22 @@ const Page = () => {
               type="time"
               value={day.startTime}
               onChange={(e) => handleChange(index, 'startTime', e.target.value)}
-              className="border border-gray-400 px-2 py-1 rounded col-span-1"
+              className={`border border-gray-400 px-2 py-1 rounded col-span-1 ${!day.isOpen ? 'bg-gray-200' : ''}`}
+              disabled={!day.isOpen}
             />
             <input
               type="time"
               value={day.endTime}
               onChange={(e) => handleChange(index, 'endTime', e.target.value)}
-              className="border border-gray-400 px-2 py-1 rounded col-span-1"
+              className={`border border-gray-400 px-2 py-1 rounded col-span-1 ${!day.isOpen ? 'bg-gray-200' : ''}`}
+              disabled={!day.isOpen}
             />
             <input
               type="number"
               value={day.hourlyRate}
               onChange={(e) => handleChange(index, 'hourlyRate', e.target.value)}
-              className="border border-gray-400 px-2 py-1 rounded col-span-1"
+              className={`border border-gray-400 px-2 py-1 rounded col-span-1 ${!day.isOpen ? 'bg-gray-200' : ''}`}
+              disabled={!day.isOpen}
             />
           </div>
         ))}
